@@ -28,7 +28,7 @@ countries <- data.frame(NAME = c("China", "Iran", "South Korea", "Europe"),
                         POP2005 = c(1304000000, 70420000, 48180000, 462000000),
                         lat = c(35, 32.43, 35.91, 54.53),
                         lng = c(105, 53.69, 127.77, 15.26))
-
+$This is the section where Im trying to add specific Shapefile of each country
 countries %>%
   leaflet() %>%
   addTiles() %>%

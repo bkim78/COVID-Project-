@@ -26,7 +26,9 @@ ui <- fluidPage(
 
         )
     )
-
+#I need to figure out how to make the level selected correspond with specific countries 
+#Level 3 is China, Iran, South Korea, and most of Europe
+#Level 2 and 1 in other regions 
 # Define server logic required to draw a histogram
 install.packages("dplyr")
 install.packages("plotly")
@@ -43,6 +45,8 @@ server <- function(input, output) {
         
     })
 }
+
+
 
 # Run the application 
 shinyApp(ui = ui, server = server)
