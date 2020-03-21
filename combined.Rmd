@@ -204,7 +204,7 @@ selectInput("source", "Source results from: ",
 
 ```
    
-Column {data-width=650}
+Column {.tabset}
 -------------------------------------
    
 ### Search hits for "coronavirus"
@@ -219,7 +219,7 @@ renderPlotly({
 })
 ```   
  
-### Popular related queries to "coronavirus"
+### Popular queries related to "coronavirus"
     
 ```{r related}
 

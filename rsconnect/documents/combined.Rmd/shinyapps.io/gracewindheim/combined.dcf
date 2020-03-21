@@ -1,0 +1,12 @@
+name: combined
+title: combined
+username:
+account: gracewindheim
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1975254
+bundleId: 2906238
+url: https://gracewindheim.shinyapps.io/combined/
+when: 1584819816.2436
+asMultiple: FALSE
+asStatic: FALSE
