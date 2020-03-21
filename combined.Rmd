@@ -1,36 +1,131 @@
 ---
-title: "Untitled"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
+title: "Coronavirus Information Dashboard"
+output: flexdashboard::flex_dashboard
+runtime: shiny
+
 ---
 
 ```{r setup, include=FALSE}
-library(flexdashboard)
+library(flexdashboard); 
+library(dplyr); library(plotly); library(rgdal); library(leaflet); library(magrittr); library(gtrendsR)
 ```
 
-Column {data-width=650}
------------------------------------------------------------------------
+About
+===================================== 
 
-### Chart A
+IMAGES: Map, Graph, Trends
+    
+_DISCLAIMER: This was created as part of a class project and should not be used as official health information._
 
+DESCRIPTION: Use this app to see how popular the search term **coronavirus** has been over time and what related queries are being searched for on Google. Use the options below to compare the performance to another search term, change the time frame, or change source of the data.
+
+HOW TO USE: Navigate the various tabs to explore different types of data about the COVID-19 outbreak.
+
+DATA USAGE: Data is sourced from Google and retrieved through the gtrendsR package. Information last updated March 21, 2020.
+
+
+Travel Restrictions
+===================================== 
+    
+### Chart 1
+    
 ```{r}
 
 ```
+    
+Statistics
+=====================================     
+
+Column
+-------------------------------------
+    
+### Cases
+    
+```{r}
+```
+   
+Column
+-------------------------------------
+    
+### Deaths
+    
+```{r}
+```
+    
+### Recovered
+
+```{r}
+```
+
+Trends
+=====================================     
 
 Column {data-width=350}
------------------------------------------------------------------------
+-------------------------------------
+    
+### Inputs
+    
+```{r select}
 
-### Chart B
+selectInput("time", "Show results from the: ",
+                c("Past hour" = "now 1-H",
+                  "Past day"= "now 1-d",
+                  "Past 7 days" = "now 7-d",
+                  "Past 30 days" = "today 1-m",
+                  "Past 90 days" = "today 3-m",
+                  "Past 12 months" = "today 12-m",
+                  "Past 5 years" = "today+5-y"
+                  ), selected = "now 1-H")
 
-```{r}
+selectInput("source", "Source results from: ",
+            c("All web" = "web",
+              "YouTube only" = "youtube",
+              "Images only" = "images",
+              "Froogle only" = "froogle"),
+            selected = "youtube")
 
 ```
+   
+Column {data-width=650}
+-------------------------------------
+   
+### Interest over time
 
-### Chart C
+```{r interest}
 
-```{r}
+y = reactive({gtrends("coronavirus", time = input$time, gprop = input$source)})
 
+renderPlotly({
+  #y = gtrends("coronavirus", time = input$time, gprop = input$source)
+  plot(y())
+})
+```   
+ 
+### Popular related queries
+    
+```{r related}
+
+renderPlotly({
+  #x = gtrends("coronavirus", time = input$time, gprop = input$source)
+  
+  if (is.null(y()$related_queries)) {
+    verbatimTextOutput("No results found, try a different search!")
+  } else {
+    
+    queries = y()$related_queries %>% filter(subject >= 1)
+    queries$subject = as.numeric(queries$subject) # make number
+    queries = na.omit(queries)
+    
+    queries$value <- factor(queries$value, levels = unique(queries$value)[order(queries$subject, decreasing = FALSE)]) # order
+    
+    x <- list(title = "Search hits")
+    y <- list(title = "Related query")
+    fig = plot_ly(queries, x = ~subject, y = ~value, type = 'bar', name = "Related queries", marker = list(color = '#9119b8')) 
+    fig = fig %>% layout(xaxis = x, yaxis = y)
+    
+    fig
+  }
+  
+})
 ```
 
