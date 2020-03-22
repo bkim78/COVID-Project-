@@ -12,13 +12,46 @@ library(dplyr); library(plotly); library(rgdal); library(leaflet); library(magri
 
 About
 ===================================== 
+
 Created by Bo Kim, Austin Gu, and Grace Windheim
 
 _**DISCLAIMER: This was created as part of a class project and should not be used as official health information.**_
 
-DESCRIPTION: Navigate the various tabs to explore information about travel restrictions, statistics, and trends related to the COVID-19 outbreak.
+Information last updated on March 22, 2020.
 
-DATA USAGE: Information last updated March 21, 2020.
+The Coronavirus Info Dashboard is a user-friendly, interactive tool to monitor and visualize the COVID-19 pandemic from a variety of perspectives.
+
+**Travel Restrictions**
+
+Map displays countries with CDC Level 3 Travel Health Notice which states that nonessential travel to the following destinations should be avoided according to the CDC. 
+
+* Use the +/- tabs to zoom in and out of the map. 
+
+* Click and drag the map to re-orient. 
+
+* Hover over the country of interest. 
+
+* Red pins indicate countries with “Level 3 Travel Health Notice”
+
+**Statistics**
+
+Plots display total confirmed cases, total people recovered, and total deaths by day. 
+
+* Hover over plot for date, value, and country 
+
+* Double click country name to isolate plot of interest
+
+* Top-right toolbar includes option to compare country data by hover 
+
+**Trends**
+
+Graphs display Google search hits for the term “coronavirus” over time and for popular queries related to “coronavirus.”
+
+* Select time range to see results from the past hour, past day, past 7 days, past 30 days, etc. 
+
+* Select results source to be all web, YouTube only, images only, or Froogle only.
+
+* Hover over plots to display the relative popularity of the search term
 
 
 1. Travel Restrictions
@@ -180,7 +213,7 @@ _**Graphics may take a few moments to load, please be patient!**_
 
 Graphs are plotted on a relative scale and times are shown in Coordinated Universal Time (UTC).
 
-Data is sourced from Google and retrieved through the gtrendsR package. 
+Data is sourced from Google Trends and retrieved through the gtrendsR package. 
 
 ```{r select}
 
