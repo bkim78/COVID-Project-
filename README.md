@@ -1,4 +1,6 @@
 # Coronavirus Info Dashboard
+Link to app: https://gracewindheim.shinyapps.io/combined/
+
 Created by Bo Kim, Austin Gu, and Grace Windheim
 
 
