@@ -212,7 +212,7 @@ Column {data-width=350}
     
 ### Inputs
 
-_**Graphics may take a few moments to load, please be patient!**_  
+_**Graphics may take a few moments to load, please be patient! If an error message is shown, that means no data has been found - try another search.**_  
 
 Graphs are plotted on a relative scale and times are shown in Coordinated Universal Time (UTC).
 
@@ -236,7 +236,7 @@ selectInput("source", "Source results from: ",
               "YouTube only" = "youtube",
               "Images only" = "images",
               "Froogle only" = "froogle"),
-            selected = "youtube")
+            selected = "web")
 
 ```
    
@@ -259,27 +259,22 @@ renderPlotly({
     
 ```{r related}
 
-renderPlotly({
-  #x = gtrends("coronavirus", time = input$time, gprop = input$source)
-  
-  if (is.null(y()$related_queries)) {
-    verbatimTextOutput("No results found, try a different search!")
-  } else {
+  renderPlotly({
+    #x = gtrends("coronavirus", time = input$time, gprop = input$source)
+      
+      queries = y()$related_queries %>% filter(subject >= 1)
+      queries$subject = as.numeric(queries$subject) # make number
+      queries = na.omit(queries)
+      
+      queries$value <- factor(queries$value, levels = unique(queries$value)[order(queries$subject, decreasing = FALSE)]) # order
+      
+      x <- list(title = "Search hits")
+      y <- list(title = "Related query")
+      fig = plot_ly(queries, x = ~subject, y = ~value, type = 'bar', name = "Related queries", marker = list(color = '#9119b8')) 
+      fig = fig %>% layout(xaxis = x, yaxis = y)
+      
+      fig
     
-    queries = y()$related_queries %>% filter(subject >= 1)
-    queries$subject = as.numeric(queries$subject) # make number
-    queries = na.omit(queries)
-    
-    queries$value <- factor(queries$value, levels = unique(queries$value)[order(queries$subject, decreasing = FALSE)]) # order
-    
-    x <- list(title = "Search hits")
-    y <- list(title = "Related query")
-    fig = plot_ly(queries, x = ~subject, y = ~value, type = 'bar', name = "Related queries", marker = list(color = '#9119b8')) 
-    fig = fig %>% layout(xaxis = x, yaxis = y)
-    
-    fig
-  }
-  
-})
+  })
 ```
 
