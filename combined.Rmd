@@ -15,11 +15,14 @@ About
 
 Created by Bo Kim, Austin Gu, and Grace Windheim
 
+The Coronavirus Info Dashboard is a user-friendly, interactive tool to monitor and visualize the COVID-19 pandemic from a variety of perspectives.
+
+
 _**DISCLAIMER: This was created as part of a class project and should not be used as official health information.**_
 
-Information last updated on March 22, 2020.
 
-The Coronavirus Info Dashboard is a user-friendly, interactive tool to monitor and visualize the COVID-19 pandemic from a variety of perspectives.
+Travel Restrictions data last updated on March 22, 2020. Data used to generate the Statistics and Trends tabs are updated continuously.
+
 
 **Travel Restrictions**
 
