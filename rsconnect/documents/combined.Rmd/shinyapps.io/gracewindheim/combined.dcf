@@ -5,8 +5,8 @@ account: gracewindheim
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1975254
-bundleId: 2914301
+bundleId: 2936840
 url: https://gracewindheim.shinyapps.io/combined/
-when: 1584989947.06759
+when: 1585419872.49028
 asMultiple: FALSE
 asStatic: FALSE
